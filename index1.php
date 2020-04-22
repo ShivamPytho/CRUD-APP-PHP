@@ -93,12 +93,11 @@ include 'connection.php';
       <div class="modal-body">
         <div class="form-group">
           <label>First Name:</label>
-          <input type="text" name="" id="firstname" class="form-control" value="<?php if(!empty($selecteditdata) ){ echo $selecteditdata[0]['firstname']; } ?>" placeholder="Enter First Name ">
+          <input type="text" name="" id="firstname" class="form-control" placeholder="Enter First Name" required="">
         </div>
-
         <div class="form-group">
           <label>Last  Name:</label>
-          <input type="text" name="" id="lastname" class="form-control" placeholder="Enter Last Name ">
+          <input type="text" name="" id="lastname" class="form-control" placeholder="Enter Last Name " >
         </div>
 
         <div class="form-group">
@@ -114,7 +113,7 @@ include 'connection.php';
       </div>
       <div class="modal-footer">
         <!--<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>-->
-        <button type="button" class="btn btn-primary" onclick="addRecord()">Save</button>
+        <button type="submit" class="btn btn-primary" onclick="addRecord()">Save</button>
       </div>
       </form>
     </div>
@@ -143,6 +142,15 @@ include 'connection.php';
         var lastname = $('#lastname').val();
         var email = $('#email').val();
         var number = $('#number').val();
+        if (firstname=='' && lastname=='' && email=='' && number=='') {
+          Swal.fire({
+            icon: 'error',
+            title: 'Something Went Wrong',
+            showConfirmButton: false,
+            timer: 1500
+          })
+        } 
+        else{
        // alert(firstname);
         $.ajax({
           url:"codeindex1.php",
@@ -175,6 +183,7 @@ include 'connection.php';
           }
 
         });
+      }
       }
         function detetedata(id){
     Swal.fire({
